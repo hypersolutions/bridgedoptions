@@ -21,7 +21,7 @@
         <RepositoryType>github</RepositoryType>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <PackageReleaseNotes>Added support for the dependency injection NuGet package</PackageReleaseNotes>
+        <PackageReleaseNotes>Initial release</PackageReleaseNotes>
     </PropertyGroup>
 
     <ItemGroup>
