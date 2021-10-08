@@ -18,7 +18,7 @@ the interface segregation (if you desired).
 All of this is achieved by using the bridge pattern. This pattern uncouples the desired options interface from the source via a _bridging_ class. This allows you to perform 
 any extra logic before returning your _bridged_ version, without the need to mutate the original options.
 
-Also you do not need to expose your new concrete object, just your interface as your returning type can be defined within your bridge as a nested class.
+Also you do not need to expose your new concrete object, just your interface as your returning type, so you can be define concrete implementation within your bridge, as a nested class.
 
 ### Simple Example
 
