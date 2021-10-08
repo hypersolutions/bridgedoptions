@@ -12,12 +12,12 @@
         <Authors>HyperSolutions</Authors>
         <Company>HyperSolutions</Company>
         <Title>Configuration Options Bridging</Title>
-        <PackageProjectUrl>https://github.com/hypersolutions/bridgdoptions</PackageProjectUrl>
+        <PackageProjectUrl>https://github.com/hypersolutions/bridgedoptions</PackageProjectUrl>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <Description>Provides support for creating bridges between the options and another class</Description>
         <Copyright>HyperSolutions 2021</Copyright>
         <PackageTags>Options Configuration Bridge</PackageTags>
-        <RepositoryUrl>https://github.com/hypersolutions/bridgdoptions</RepositoryUrl>
+        <RepositoryUrl>https://github.com/hypersolutions/bridgedoptions</RepositoryUrl>
         <RepositoryType>github</RepositoryType>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
