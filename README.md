@@ -1,4 +1,4 @@
-# HyperMap
+# Bridged Options
 
 ## Getting Started
 
