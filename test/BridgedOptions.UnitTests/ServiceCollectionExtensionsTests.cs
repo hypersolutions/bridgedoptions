@@ -8,6 +8,7 @@ using Shouldly;
 using Xunit;
 // ReSharper disable ClassNeverInstantiated.Global
 // ReSharper disable UnusedAutoPropertyAccessor.Global
+// ReSharper disable UnusedMember.Global
 
 namespace BridgedOptions.UnitTests
 {
@@ -49,20 +50,8 @@ namespace BridgedOptions.UnitTests
             
             var provider = services.BuildServiceProvider();
 
-            IAccountInfo options1;
-            
-            using (var scope = provider.CreateScope())
-            {
-                options1 = scope.ServiceProvider.GetService<IAccountInfo>();
-            }
-            
-            IAccountInfo options2;
-            
-            using (var scope = provider.CreateScope())
-            {
-                options2 = scope.ServiceProvider.GetService<IAccountInfo>();
-            }
-            
+            var options1 = GetRequiredService<IAccountInfo>(provider);
+            var options2 = GetRequiredService<IAccountInfo>(provider);
             options1.ShouldBe(options2);
         }
         
@@ -102,20 +91,8 @@ namespace BridgedOptions.UnitTests
             
             var provider = services.BuildServiceProvider();
 
-            IAccountInfo options1;
-            
-            using (var scope = provider.CreateScope())
-            {
-                options1 = scope.ServiceProvider.GetService<IAccountInfo>();
-            }
-            
-            IAccountInfo options2;
-            
-            using (var scope = provider.CreateScope())
-            {
-                options2 = scope.ServiceProvider.GetService<IAccountInfo>();
-            }
-            
+            var options1 = GetRequiredService<IAccountInfo>(provider);
+            var options2 = GetRequiredService<IAccountInfo>(provider);
             options1.ShouldNotBe(options2);
         }
         
@@ -155,20 +132,8 @@ namespace BridgedOptions.UnitTests
             
             var provider = services.BuildServiceProvider();
 
-            IAccountInfo options1;
-            
-            using (var scope = provider.CreateScope())
-            {
-                options1 = scope.ServiceProvider.GetService<IAccountInfo>();
-            }
-            
-            IAccountInfo options2;
-            
-            using (var scope = provider.CreateScope())
-            {
-                options2 = scope.ServiceProvider.GetService<IAccountInfo>();
-            }
-            
+            var options1 = GetRequiredService<IAccountInfo>(provider);
+            var options2 = GetRequiredService<IAccountInfo>(provider);
             options1.ShouldNotBe(options2);
         }
         
@@ -188,13 +153,7 @@ namespace BridgedOptions.UnitTests
                 options.CurrentValue.Username = "test";
             }
             
-            IAccountInfo options2;
-            
-            using (var scope = provider.CreateScope())
-            {
-                options2 = scope.ServiceProvider.GetService<IAccountInfo>();
-            }
-            
+            var options2 = GetRequiredService<IAccountInfo>(provider);
             options2.Username.ShouldBe("test");
         }
         
@@ -209,6 +168,12 @@ namespace BridgedOptions.UnitTests
             memoryConfig.InitialData = items;
             var configuration = new ConfigurationBuilder().Add(memoryConfig).Build();
             return configuration.GetSection("Account");
+        }
+
+        private static T GetRequiredService<T>(IServiceProvider provider)
+        {
+            using var scope = provider.CreateScope();
+            return scope.ServiceProvider.GetService<T>();
         }
         
         public interface IAccountInfo
