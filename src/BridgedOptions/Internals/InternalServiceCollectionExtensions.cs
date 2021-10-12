@@ -14,7 +14,7 @@ namespace BridgedOptions.Internals
             where TOptions : class
         {
             services.AddOptions();
-            services.Configure<TOptions>(section.Bind);
+            services.Configure<TOptions>(section);
 
             var bridgeViaTypeAttr = typeof(TOptions).GetCustomAttribute<BridgeViaTypeAttribute>();
 
