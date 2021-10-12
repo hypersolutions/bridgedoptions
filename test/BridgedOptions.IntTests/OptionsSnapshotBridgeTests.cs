@@ -58,7 +58,7 @@ namespace BridgedOptions.IntTests
                 Password = Convert.ToBase64String(Encoding.UTF8.GetBytes(password))
             };
             var json = JsonSerializer.Serialize(new Options { Account = options });
-            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "appsettings.json");
+            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "appsettings.snapshot.json");
             File.WriteAllText(path, json);
         }
 
@@ -68,7 +68,7 @@ namespace BridgedOptions.IntTests
             const bool reloadable = true;
             var builder = new ConfigurationBuilder()
                 .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-                .AddJsonFile("appsettings.json", notOptional, reloadable);
+                .AddJsonFile("appsettings.snapshot.json", notOptional, reloadable);
             return builder.Build();
         }
 
