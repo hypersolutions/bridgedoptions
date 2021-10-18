@@ -22,12 +22,16 @@ namespace BridgedOptions.IntTests
             var configuration = BuildConfig();
             
             var services = new ServiceCollection();
-            services.AddMonitoredOptionsBridge<AccountOptions, IAccountInfo>(configuration.GetSection("Account"));
+            services.AddScopedOptionsBridge<AccountOptions, IAccountInfo>(configuration.GetSection("Account"));
             
             var provider = services.BuildServiceProvider();
-            var options = provider.GetRequiredService<IAccountInfo>();
-            options.Username.ShouldBe("homers");
-            options.Password.ShouldBe("Simpsons");
+            
+            using (var scope = provider.CreateScope())
+            {
+                var options = scope.ServiceProvider.GetRequiredService<IAccountInfo>();
+                options.Username.ShouldBe("homers");
+                options.Password.ShouldBe("Simpsons");
+            }
             
             UpdateConfig("homers", "51mp50n5");
 
@@ -45,9 +49,13 @@ namespace BridgedOptions.IntTests
             }
             
             hasChanged.ShouldBeTrue("Failed to update the config in a timely manner.");
-            options = provider.GetRequiredService<IAccountInfo>();
-            options.Username.ShouldBe("homers");
-            options.Password.ShouldBe("51mp50n5");
+
+            using (var scope = provider.CreateScope())
+            {
+                var options = scope.ServiceProvider.GetRequiredService<IAccountInfo>();
+                options.Username.ShouldBe("homers");
+                options.Password.ShouldBe("51mp50n5");
+            }
         }
 
         private static void UpdateConfig(string username, string password)
